@@ -6,8 +6,6 @@ on:
       - main
     paths-ignore:
       - helm/go-web-app-chart/values-eks.yaml
-      - docs/**
-      - "**/*.md"
   pull_request:
   workflow_dispatch:
 
