@@ -16,6 +16,8 @@ kind load docker-image "${image}:${tag}" --name "${cluster}"
 
 helm --kube-context "${context}" --namespace "${namespace}" uninstall go-web-app >/dev/null 2>&1 || true
 kubectl --context "${context}" apply -f gitops/applications/go-web-app-kind.yaml
+kubectl --context "${context}" --namespace argocd annotate application go-web-app-kind \
+  argocd.argoproj.io/refresh=hard --overwrite >/dev/null
 
 for _ in {1..60}; do
   sync=$(kubectl --context "${context}" --namespace argocd get application go-web-app-kind -o jsonpath='{.status.sync.status}' 2>/dev/null || true)
