@@ -2,6 +2,10 @@
 
 The project fork is `rkjas112/go-web-app-devops`.
 
+GitHub disables inherited workflows on new public forks by default. Repository
+Actions permissions must be enabled once before `push` events create runs; the
+workflow also keeps `workflow_dispatch` for explicit verification.
+
 ## Pipeline behavior
 
 Every push and pull request runs:
