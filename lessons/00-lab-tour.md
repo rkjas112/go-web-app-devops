@@ -1,5 +1,10 @@
 # Lesson 0 — Tour the reusable lab
 
+Video context: project overview at
+[00:05–05:25](https://www.youtube.com/watch?v=HGu9sgoHaJ0&t=5s), with tool
+prerequisites revisited during Docker, EKS, Helm, and Argo CD setup. This lesson
+uses the setup already completed on your machine to avoid repeating installs.
+
 ## Goal
 
 Understand the difference between a command-line tool, a running service, and a

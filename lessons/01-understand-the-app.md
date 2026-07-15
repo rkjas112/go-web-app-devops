@@ -1,5 +1,8 @@
 # Lesson 1 — Understand what will be deployed
 
+Video segment:
+[05:25–09:50](https://www.youtube.com/watch?v=HGu9sgoHaJ0&t=325s).
+
 ## Goal
 
 Before containerizing an application, identify its runtime contract: how it

@@ -5,6 +5,9 @@ as Abhishek Veeramalla's DevOpsified video. The objective is not merely to own
 working files; it is to understand why each layer exists and to be able to
 diagnose it when it fails.
 
+Use [VIDEO-MAP.md](VIDEO-MAP.md) to jump to the exact video section and find
+the matching source, exercise, and completed reference files.
+
 ## Two branches, two purposes
 
 | Branch | Purpose |
@@ -65,11 +68,11 @@ what comes out, and how to verify it.
 | 1 | Understand the app | Entry point, routes, port, static runtime files, tests |
 | 2 | Containerization | Image versus container, layers, multi-stage builds, non-root runtime |
 | 3 | Kubernetes manifests | Pod, Deployment, Service, Ingress, probes, resources |
-| 4 | Helm | Templates, values, releases, Kind/EKS environment overrides |
-| 5 | GitHub Actions | Trigger, runner, job, step, secret, artifact, failure gates |
-| 6 | Argo CD | Desired state, sync, health, drift, self-healing, GitOps loop |
-| 7 | Ingress | Host routing, controller, Service, local versus cloud load balancer |
-| 8 | EKS and DNS | Control plane, nodes, IAM, cost, LoadBalancer, DNS record |
+| 4 | EKS and manifest validation | Control plane, nodes, IAM, cost, apply, inspect, troubleshoot |
+| 5 | Ingress and DNS | Host routing, controller, Service, local/cloud load balancer, DNS mapping |
+| 6 | Helm | Templates, values, releases, Kind/EKS environment overrides |
+| 7 | GitHub Actions | Trigger, runner, job, step, secret, artifact, failure gates |
+| 8 | Argo CD | Desired state, sync, health, drift, self-healing, GitOps loop |
 | 9 | End-to-end demo | Trace one commit from source to the public application |
 
 Progress is recorded in [PROGRESS.md](PROGRESS.md).
