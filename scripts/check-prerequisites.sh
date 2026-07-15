@@ -33,6 +33,16 @@ if ! kubectl --context "${context}" get --raw=/readyz --request-timeout=8s >/dev
   missing=1
 else
   echo "Kubernetes context ${context} is reachable."
+  if kubectl --context "${context}" --namespace argocd get deployment argocd-server >/dev/null 2>&1; then
+    echo "Argo CD server is installed in ${context}."
+  else
+    echo "Argo CD server was not detected in ${context}."
+  fi
+  if kubectl --context "${context}" --namespace ingress-nginx get deployment ingress-nginx-controller >/dev/null 2>&1; then
+    echo "ingress-nginx is installed in ${context}."
+  else
+    echo "ingress-nginx was not detected in ${context}."
+  fi
 fi
 
 exit "${missing}"

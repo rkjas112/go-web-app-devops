@@ -1,5 +1,7 @@
 # Go Web App — End-to-End DevOps Project
 
+[![CI/CD](https://github.com/rkjas112/go-web-app-devops/actions/workflows/cicd.yaml/badge.svg)](https://github.com/rkjas112/go-web-app-devops/actions/workflows/cicd.yaml)
+
 This fork implements the complete learning path from Abhishek Veeramalla's
 [DevOpsified project video](https://www.youtube.com/watch?v=HGu9sgoHaJ0):
 
