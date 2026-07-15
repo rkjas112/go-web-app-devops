@@ -1,0 +1,23 @@
+replicaCount: 2
+
+image:
+  repository: your-dockerhub-username/go-web-app
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: go-web-app.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi

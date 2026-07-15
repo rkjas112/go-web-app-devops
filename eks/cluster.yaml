@@ -1,0 +1,29 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: go-web-app-eks
+  region: ap-south-1
+  tags:
+    project: go-web-app-devops
+    managed-by: eksctl
+
+iam:
+  withOIDC: true
+
+vpc:
+  nat:
+    gateway: Disable
+
+managedNodeGroups:
+  - name: general
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    volumeSize: 20
+    privateNetworking: false
+    labels:
+      workload: general
+    tags:
+      nodegroup-role: general

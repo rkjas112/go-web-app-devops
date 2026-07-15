@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: go-web-app-kind
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rkjas112/go-web-app-devops.git
+    targetRevision: main
+    path: helm/go-web-app-chart
+    helm:
+      releaseName: go-web-app
+      valueFiles:
+        - values-kind.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: go-web-app-kind
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

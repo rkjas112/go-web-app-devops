@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: go-web-app
+  pullPolicy: IfNotPresent
+  tag: "dev"
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: go-web-app.local
+      paths:
+        - path: /
+          pathType: Prefix

@@ -1,0 +1,16 @@
+.git
+.github
+.DS_Store
+Dockerfile*
+README*.md
+docs
+eks
+gitops
+helm
+ingress-controller
+k8s
+scripts
+work
+outputs
+go-web-app
+*.log

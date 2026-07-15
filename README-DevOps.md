@@ -1,72 +1,41 @@
-# DevOpsify the go web application
+# DevOps implementation notes
 
-The main goal of this project is to implement DevOps practices in the Go web application. The project is a simple website written in Golang. It uses the `net/http` package to serve HTTP requests.
-
-DevOps practices include the following:
-
-- Creating Dockerfile (Multi-stage build)
-- Containerization
-- Continuous Integration (CI)
-- Continuous Deployment (CD)
-
-## Summary Diagram
-![image](https://github.com/user-attachments/assets/45f4ef12-c5b5-4247-9d43-356b5dfb671b)
-
-
-## Creating Dockerfile (Multi-stage build)
-
-The Dockerfile is used to build a Docker image. The Docker image contains the Go web application and its dependencies. The Docker image is then used to create a Docker container.
-
-We will use a Multi-stage build to create the Docker image. The Multi-stage build is a feature of Docker that allows you to use multiple build stages in a single Dockerfile. This will reduce the size of the final Docker image and also secure the image by removing unnecessary files and packages.
+This project starts with a small Go `net/http` application and implements an
+end-to-end CI/CD and GitOps workflow.
 
 ## Containerization
 
-Containerization is the process of packaging an application and its dependencies into a container. The container is then run on a container platform such as Docker. Containerization allows you to run the application in a consistent environment, regardless of the underlying infrastructure.
+The Dockerfile uses three logical stages:
 
-We will use Docker to containerize the Go web application. Docker is a container platform that allows you to build, ship, and run containers.
+1. Run the Go unit tests.
+2. Compile a static binary for the target platform.
+3. Copy only the binary and static pages into a distroless, non-root runtime.
 
-Commands to build the Docker container:
+This keeps the runtime image small and removes compilers, shells, and package
+managers from the deployed container.
 
-```bash
-docker build -t <your-docker-username>/go-web-app .
-```
+## Kubernetes
 
-Command to run the Docker container:
+Two deployment approaches are included:
 
-```bash
-docker run -p 8080:8080 <your-docker-username>/go-web-app
-```
+- `k8s/manifests` demonstrates the Deployment, Service, Ingress, namespace, and
+  Kustomize image override directly.
+- `helm/go-web-app-chart` packages the same resources as a parameterized chart
+  with health probes, resource limits, and security contexts.
 
-Command to push the Docker container to Docker Hub:
+The Kind and EKS values files keep local and cloud settings separate.
 
-```bash
-docker push <your-docker-username>/go-web-app
-```
+## Continuous integration
 
-## Continuous Integration (CI)
+GitHub Actions runs unit tests, `go vet`, `golangci-lint`, Helm lint/render
+checks, and a Docker build on pushes and pull requests. Image publishing is
+disabled until the Docker Hub secrets and `ENABLE_DOCKERHUB_PUSH` repository
+variable are configured.
 
-Continuous Integration (CI) is the practice of automating the integration of code changes into a shared repository. CI helps to catch bugs early in the development process and ensures that the code is always in a deployable state.
+## Continuous delivery
 
-We will use GitHub Actions to implement CI for the Go web application. GitHub Actions is a feature of GitHub that allows you to automate workflows, such as building, testing, and deploying code.
+After CI publishes an image, it commits the immutable Git commit tag to the EKS
+values file. Argo CD watches the repository, detects that GitOps change, and
+reconciles the EKS namespace automatically.
 
-The GitHub Actions workflow will run the following steps:
-
-- Checkout the code from the repository
-- Build the Docker image
-- Run the Docker container
-- Run tests
-
-## Continuous Deployment (CD)
-
-Continuous Deployment (CD) is the practice of automatically deploying code changes to a production environment. CD helps to reduce the time between code changes and deployment, allowing you to deliver new features and fixes to users faster.
-
-We will use Argo CD to implement CD for the Go web application. Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. It allows you to deploy applications to Kubernetes clusters using Git as the source of truth.
-
-The Argo CD application will deploy the Go web application to a Kubernetes cluster. The application will be automatically synced with the Git repository, ensuring that the application is always up to date.
-
-## Conclusion
-
-
-
-
-
+For detailed commands, use the guides in the `docs` directory.
