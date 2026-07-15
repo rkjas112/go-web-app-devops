@@ -64,6 +64,11 @@ The script removes only the direct Helm release, applies
 `gitops/applications/go-web-app-kind.yaml`, waits for `Synced` and `Healthy`,
 and repeats the HTTP checks.
 
+The Kind values add Argo CD's documented `ignore-healthcheck` annotation only
+to the local Ingress. A Kind Ingress has no cloud load-balancer status, which
+would otherwise keep the Application in `Progressing`; the EKS values retain
+the normal load-balancer health evaluation.
+
 To view the Argo CD UI locally:
 
 ```bash

@@ -8,6 +8,9 @@ image:
 ingress:
   enabled: true
   className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    argocd.argoproj.io/ignore-healthcheck: "true"
   hosts:
     - host: go-web-app.local
       paths:
